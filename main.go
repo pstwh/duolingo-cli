@@ -1,10 +1,25 @@
 package main
 
 import (
+	"encoding/json"
+	"io/ioutil"
+
 	"./duolingo"
-	//"fmt"
+)
+
+type (
+	Config struct {
+		Login    string `json:"login"`
+		Password string `json:"password"`
+	}
 )
 
 func main() {
-	duolingo.Login()
+	var config Config
+
+	config_file, _ := ioutil.ReadFile("config.json")
+	json.Unmarshal(config_file, &config)
+
+	client := duolingo.Login(config.Login, config.Password)
+	client.GetActivity()
 }
