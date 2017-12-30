@@ -1,10 +1,9 @@
 package main
 
 import (
+	"./duolingo"
 	"encoding/json"
 	"io/ioutil"
-
-	"./duolingo"
 )
 
 type (
@@ -21,5 +20,6 @@ func main() {
 	json.Unmarshal(config_file, &config)
 
 	client := duolingo.Login(config.Login, config.Password)
-	client.GetActivity()
+	//client.GetActivity()
+	client.GetCourses()
 }
